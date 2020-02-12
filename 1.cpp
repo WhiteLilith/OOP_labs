@@ -182,8 +182,58 @@ int main()
 
 	char c = (char)156;
 
-	cout << endl << "Десятичных фунтов: " << des_funt << c;
+	cout << endl << "Десятичных фунтов: " << floor(des_funt*100)/100 << c;
 
 	return 0;
 }
 //#11
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	cout << setiosflags(ios::left)
+		 << setw(12) << "Фамилия"
+		 << setw(14) << "Имя"
+		 << setw(16) << "Адрес"
+		 << setw(14) << "Город" << "\n"
+		//
+		 << setw(12) << "Петров"
+		 << setw(14) << "Василий"
+		 << setw(16) << "Кленовая 16"
+		 << setw(14) << "Санкт-Петербург" << "\n"
+		//
+		 << setw(12) << "Иванов"
+		 << setw(14) << "Сергей"
+		 << setw(16) << "Осиновая 3"
+		 << setw(14) << "Находка" << "\n"
+		//
+		 << setw(12) << "Сидоров"
+		 << setw(14) << "Иван"
+		 << setw(16) << "Березовая 21"
+		 << setw(14) << "Калиниград" << "\n";
+	return 0;
+}
+#12
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+	float des_funt;
+	int funt, shil, pense;
+
+	cout << "Vvedite kolvo desiatichnih funtov: ";
+	cin >> des_funt;
+	funt = floor(des_funt);
+	shil = (int)(((int)(des_funt*240 - funt*240)) / 12);
+	pense = ((int)(des_funt * 240 - funt * 240)) - shil * 12;
+
+	cout << "Eto " << funt << " funtov, " << shil << " shillingov, " << pense << " pensov.";
+
+	return 0;
+}
