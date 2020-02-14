@@ -353,3 +353,191 @@ int main()
 	return 0;
 }
 #11
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	bool cont = 1;
+	int shil_1, funt_1, pense_1;
+	int shil_2, funt_2, pense_2;
+	int shil_3 = 0, funt_3 = 0, pense_3 = 0;
+
+	do {
+		cont = 0;
+
+		cout << "Введите первую сумму: ";
+		cin >> funt_1;
+		cout << " ";
+		cin >> shil_1;
+		cout << " ";
+		cin >> pense_1;
+
+		char oper;
+		float mult;
+		cout << "Введите опреатор: ";
+		{
+			cin >> oper;
+		}
+
+		if ((oper == '+') || (oper == '-'))
+		{
+			cout << "Введите вторую сумму: ";
+			cin >> funt_2;
+			cout << " ";
+			cin >> shil_2;
+			cout << " ";
+			cin >> pense_2;
+		}
+		else
+		{
+			cout << "Введите множитель: ";
+			cin >> mult;
+		}
+
+
+		switch (oper)
+		{
+		case '+':
+			pense_3 = pense_1 + pense_2;
+			if (pense_3 > 11)
+			{
+				shil_3++;
+				pense_3 -= 12;
+			}
+
+			shil_3 = shil_3 + shil_1 + shil_2;
+			if (shil_3 > 19)
+			{
+				funt_3++;
+				shil_3 -= 20;
+			}
+
+			funt_3 = funt_3 + funt_1 + funt_2;
+			break;
+
+		case '-':
+			pense_3 = pense_1 - pense_2;
+			if (pense_3 < 0)
+			{
+				shil_3--;
+				pense_3 += 12;
+			}
+
+			shil_3 = shil_3 + shil_1 - shil_2;
+			if (shil_3 < 0)
+			{
+				funt_3--;
+				shil_3 += 20;
+			}
+
+			funt_3 = funt_3 + funt_1 - funt_2;
+			break;
+
+		case '*':
+			pense_3 = pense_1 * mult;
+			
+			while (pense_3 > 11)
+			{
+				shil_3++;
+				pense_3 -= 12;
+			}
+
+			shil_3 = shil_3 + (shil_1 * mult);
+			while (shil_3 > 19)
+			{
+				funt_3++;
+				shil_3 -= 20;
+			}
+
+			funt_3 = funt_3 + (funt_1 * mult);
+			break;
+
+		}
+
+		cout << endl << "Всего: " << funt_3 << " фунтов " << shil_3 << " шиллингов " << pense_3 << " пенсов";
+
+		cout << endl << "Продолжить (y/n) ";
+		char c;
+		cin >> c;
+
+		if (c == 'y')
+		{
+			cont = 1;
+		}
+
+	} while (cont);
+
+	
+
+	return 0;
+}
+#12
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	bool cont = 1;
+	int a, b, c, d;
+	int result_chisl, result_znam;
+
+
+	do {
+		cont = 0;
+
+		char dummy_char;
+
+		cout << "Введите первую дробь: ";
+		cin >> a >> dummy_char >> b;
+
+		cout << "Введите вторую дробь: ";
+		cin >> c >> dummy_char >> d;
+		
+		char oper;
+		float mult;
+		cout << "Введите опреатор: ";
+		{
+			cin >> oper;
+		}
+
+		switch (oper)
+		{
+		case '+':
+			result_chisl = (a * d + b * c);
+			result_znam = (b * d);
+			break;
+		case '-':
+			result_chisl = (a * d - b * c);
+			result_znam = (b * d);
+			break;
+		case '*':
+			result_chisl = (a * c);
+			result_znam = (b * d);
+			break;
+		case '/':
+			result_chisl = a * d;
+			result_znam = b * c;
+		}
+
+		cout << "Результат: " << result_chisl << '/' << result_znam;
+
+		cout << endl << "Продолжить (y/n) ";
+		char c;
+		cin >> c;
+
+		if (c == 'y')
+		{
+			cont = 1;
+		}
+
+	} while (cont);
+
+	return 0;
+}
