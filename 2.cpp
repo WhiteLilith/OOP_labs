@@ -192,7 +192,7 @@ cin >> numb;
 
 for(int j=numb; j>0; j--)
 
-fact *= j; //numb, numb-1, ..., 2, 1
+fact *= j;
 
 cout << "Factorial is " << fact << endl;
 
@@ -323,3 +323,33 @@ int main()
 	return 0;
 }
 #10
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	float stav, beg, needed;
+	int years = 0;
+
+	cout << "Введите процентную ставку: ";
+	cin >> stav;
+
+	cout << "Введите начальную сумму: ";
+	cin >> beg;
+
+	cout << "Введите желаемую сумму: ";
+	cin >> needed;
+
+	for (int i = beg; i < needed; i += i * (stav/100))
+	{
+		years++;
+	}
+
+	cout << "Потребуется " << years << " лет.";
+
+	return 0;
+}
+#11
