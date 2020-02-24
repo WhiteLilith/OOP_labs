@@ -629,7 +629,7 @@ int main()
 		cin >> a.shisl >> dummy_char >> a.znam;
 
 		cout << "Введите вторую дробь: ";
-		cin >> b.shisl >> dummy_char >> b.shisl;
+		cin >> b.shisl >> dummy_char >> b.znam;
 
 		char oper;
 		float mult;
