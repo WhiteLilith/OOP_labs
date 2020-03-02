@@ -51,7 +51,7 @@ int main()
 	point p1, p2, p3;
 
 	cout << "Введите координаты точки p1: ";
-	cin >> p1.x >> p2.dummy_char >> p2.y;
+	cin >> p1.x >> p1.dummy_char >> p1.y;
 
 	cout << "Введите координаты точки р2: ";
 	cin >> p2.x >> p2.dummy_char >> p2.y;
