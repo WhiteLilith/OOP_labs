@@ -292,11 +292,11 @@ struct employee
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-
+	char w;
 	etype p_1;
 	char c1;
 
-	cout << "Введите первую букву должности: ";
+	cout << "Введите первую букву должности сотрудника №1: ";
 	cin >> c1;
 
 	switch (c1)
@@ -353,16 +353,16 @@ int main()
 
 	date f1;
 
-	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №1";
-	cin >> f1.day >> f1.month >> f1.year;
+	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №1: ";
+	cin >> f1.day >> w >> f1.month  >> w >> f1.year;
 
 	etype p_2;
 	char c2;
 
-	cout << "Введите первую букву должности: ";
+	cout << "Введите первую букву должности сотрудника №2: ";
 	cin >> c2;
 
-	switch(c2)
+	switch (c2)
 	{
 		{
 	case 'l':
@@ -416,13 +416,13 @@ int main()
 
 	date f2;
 
-	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №2";
-	cin >> f2.day >> f2.month >> f2.year;
+	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №2: ";
+	cin >> f2.day >> w >> f2.month >> w >> f2.year;
 
 	etype p_3;
 	char c3;
 
-	cout << "Введите первую букву должности: ";
+	cout << "Введите первую букву должности сотрудника №3: ";
 	cin >> c3;
 
 	switch (c3)
@@ -479,8 +479,8 @@ int main()
 
 	date f3;
 
-	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №3";
-	cin >> f3.day >> f3.month >> f3.year;
+	cout << "Введите инфу о дне приёма на рaботу в виде ДД/ММ/ГГГГ сотрудника №3: ";
+	cin >> f3.day >> w >> f3.month >> w >> f3.year;
 
 	cout << "Дата приёма на работу работника №1: " << f1.day << "/" << f1.month << "/" << f1.year;
 	cout << "ОНО: " << str;
@@ -496,6 +496,32 @@ int main()
 	cout << "ОНО: " << str3;
 	cout << "Его зпрплата: " << p3.salary << endl;
 	cout << "Его ИД: " << p3.id;
+
+	return 0;
+}
+#8
+#include <iostream>
+
+using namespace std;
+
+struct fraction
+{
+	int chisl;
+	int znam;
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	fraction a, b, rez;
+	char dummy_char;
+	cout << "Введите первую дробь: ";
+	cin >> a.chisl >> dummy_char >> a.znam;
+	cout << "Введите вторую дробь: ";
+	cin >> b.chisl >> dummy_char >> b.znam;
+	rez.chisl = a.chisl * b.znam + b.chisl * a.znam;
+	rez.znam = a.znam * b.znam;
+	cout << "Результат сложения: " << rez.chisl << '/' << rez.znam;
 
 	return 0;
 }
