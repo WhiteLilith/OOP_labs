@@ -9,7 +9,12 @@ private:
 	float min;
 	char direction;
 public:
-	angle();
+	angle()
+	{
+		this->direction = 'W';
+		this->grad = 0;
+		this->min = 0;
+	}
 	angle(int a, float b, char c)
 	{
 		this->grad = a;
@@ -25,7 +30,6 @@ public:
 		cout << "Input direction: ";
 		cin >> this->direction;
 	}
-	angle();
 	void showangle()
 	{
 		cout << grad << '\xF8' << min << "\'" << direction << endl;
