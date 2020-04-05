@@ -1,0 +1,50 @@
+#include<iostream>
+
+using namespace std;
+
+class Safearray
+{
+private:
+	const static int MaxLimit = 500;
+	const static int MinLimit = 0;
+	int Array[MaxLimit];
+
+public:
+
+	void ERROR()
+	{
+		cout << "ERROR; value won't be deployed, because you can't put anything to this position";
+	}
+
+	void PutEl(int position, int element)
+	{
+		if (position < MinLimit || position >= MaxLimit)
+		{
+			ERROR();
+		}
+		else
+		{
+			Array[position] = element;
+		}
+	}
+
+	int GetEl(int position)
+	{
+		if (position < MinLimit || position >= MaxLimit)
+		{
+			ERROR();
+		}
+		else
+		{
+			return Array[position];
+		}
+	}
+};
+
+int main()
+{
+	Safearray arr;
+	int Temp = 12345;
+	arr.PutEl(4, Temp);
+	cout << arr.GetEl(4);
+}
