@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+class Matrix
+{
+private:
+	int X_Size;
+	int Y_Size;
+	const static int MaxSize = 10;
+	int Array[MaxSize][MaxSize];
+	void ERROR()
+	{
+		cout << "ERROR, because you don't have acsess to this position" << endl;
+	}
+
+public:
+	Matrix(int a, int b)
+	{
+		if (a > MaxSize || b > MaxSize)
+		{
+			cout << "ERROR, too big size..." << endl;
+		}
+		else
+		{
+			X_Size = a;
+			Y_Size = b;
+		}
+	}
+
+	void PutEl(int a, int b, int element)
+	{
+		if (a >= X_Size || b > Y_Size)
+		{
+			ERROR();
+		}
+		else
+		{
+			Array[a][b] = element;
+		}
+	}
+
+	int GetEl(int a, int b)
+	{
+		if (a >= X_Size || b > Y_Size)
+		{
+			ERROR();
+		}
+		else
+		{
+			return Array[a][b];
+		}
+			
+	}
+};
+
+int main()
+{
+	int xSize = 4;
+	int ySize = 9;
+	int putel = -123;
+	int getel;
+	Matrix matrix(xSize,ySize);
+	matrix.PutEl(3, 8, putel);
+	getel = matrix.GetEl(3, 8);
+	cout << "Element in position (3;8): " << getel;
+}
