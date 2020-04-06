@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+class Queue
+{
+private:
+    const static int Max = 500;
+    int head;
+    int tail;
+    int Array[Max];
+
+public:
+
+    Queue()
+    {
+        head = -1;
+        tail = -1;
+    }
+
+    void Put(int a)
+    {
+        tail++;
+        Array[tail] = a;
+        if (tail == Max - 1)
+        {
+            tail = -1;
+        }
+    }
+
+    int Get()
+    {
+        head++;
+        return Array[head];
+        if (head == Max - 1)
+        {
+            head = -1;
+        }
+    }
+};
+
+int main()
+{
+    Queue q;
+    q.Put(-13);
+    q.Put(0);
+    q.Put(2);
+
+    cout << "Queue: ";
+    cout << q.Get() << " ";
+    cout << q.Get() << " ";
+    cout << q.Get();
+}
