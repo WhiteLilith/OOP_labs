@@ -57,14 +57,6 @@ public:
 	{
 		cout << hrs << ":" << mins << ":" << secs;
 	}
-/*
-	Time& operator++()
-	{
-		++secs;
-		Check();
-		return *this;
-	}
-*/
 
 	Time& operator++()
 	{
