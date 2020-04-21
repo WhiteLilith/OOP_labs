@@ -46,7 +46,6 @@ public:
 		char new_s[String::SZ - 1];
 		new_s[String::SZ - 2] = '\0';
 		strncpy(new_s, String::str, strlen(new_s));
-		strncpy(String::str, new_s, strlen(new_s));
 	}
 };
 
