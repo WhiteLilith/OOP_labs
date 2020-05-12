@@ -1,174 +1,111 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <string.h> 
-#include <stdlib.h> 
-
+#include <cstring>
 using namespace std;
-
-
 class String
 {
 protected:
-	const static int STRING_SIZE = 50;
-	char str[STRING_SIZE];
-
+	enum { SZ = 80 };
+	char str[SZ];
 public:
-
 	String()
 	{
-		strncpy(str, "", STRING_SIZE);
+		str[0] = '\0';
 	}
-
-	String(char s[])
+	String(const char s[])
 	{
-		strncpy(str, s, STRING_SIZE);
+		strcpy_s(str, s);
 	}
-
 	void Display() const
 	{
-		for (int i = 0; i < STRING_SIZE; i++)
-		{
-			cout << str[i];
-		}
+		cout << str;
 	}
-
-	String operator += (String s2) const
+	operator char* ()
 	{
-		String temp;
-
-		if (strlen(str) + strlen(s2.str) < STRING_SIZE)
-		{
-			strncpy(temp.str, str, strlen(str));
-			strncat(temp.str, s2.str, strlen(s2.str));
-			temp.str[strlen(str) + strlen(s2.str) + 1] = '\0';
-		}
-
-		else
-		{
-			cout << "\nString overflow"; exit(1);
-		}
-
-		return temp;
-	}
-
-	String operator + (String s2) const
-	{
-		String temp;
-
-		if (strlen(str) + strlen(s2.str) < STRING_SIZE)
-		{
-			strncpy(temp.str, str, strlen(str));
-			strncat(temp.str, s2.str, strlen(s2.str));
-			temp.str[strlen(str) + strlen(s2.str) + 1] = '\0';
-		}
-
-		else
-		{
-			cout << "\nString overflow"; exit(1);
-		}
-
-		return temp;
+		return str;
 	}
 };
-
 
 class Pstring : public String
 {
 public:
-
-	Pstring() : String()
-	{}
-
-	Pstring(char s[]) : String(s)
+	Pstring(const char s[])
 	{
-		char new_s[String::STRING_SIZE - 1];
-		new_s[String::STRING_SIZE - 2] = '\0';
-		strncpy(new_s, String::str, strlen(new_s));
-		strncpy(String::str, new_s, strlen(new_s));
+		if (strlen(s) > SZ - 1)
+		{
+			int i = 0;
+			for (i = 0; i < SZ - 1; i++)
+			{
+				str[i] = s[i];
+			}
+			str[i] = '\0';
+		}
+		else
+		{
+			strcpy_s(str, s);
+		}
 	}
 };
-
 
 class Pstring2 : public Pstring
 {
-private:
-	void CheckBorders(int index)
-	{
-		if (index < 0 || index > STRING_SIZE - 1)
-		{
-			cout << "Out of range";
-			exit(1);
-		}
-	}
-
-	void CheckBorders(int index, int charCount)
-	{
-		if (index < 0 || index > STRING_SIZE - 1 || index + charCount > STRING_SIZE - 1)
-		{
-			cout << "Out of range";
-			exit(1);
-		}
-
-	}
 
 public:
-	Pstring2() : Pstring()
-	{}
+	Pstring2(const char s[]) : Pstring(s)
+	{ }
 
-	Pstring2(char s[]) : Pstring(s)
-	{}
-
-	Pstring2 Left(int index)
+	Pstring2 Left(int number)
 	{
-		CheckBorders(index);
-		char new_s[STRING_SIZE];
+		Pstring2 substr = "";
 		int i;
-		for (i = index; i < STRING_SIZE - 1; i++)
+		for (i = 0; i < number; i++)
 		{
-			new_s[i - index] = str[i];
+			substr[i] = str[i];
 		}
-		new_s[i] = '\0';
-		return Pstring2(new_s);
+		substr[i] = '\0';
+		return substr;
 	}
-
-	Pstring2 Right(int index)
+	Pstring2 Right(int number)
 	{
-		CheckBorders(index);
-		char new_s[STRING_SIZE];
+		Pstring2 substr = "";
 		int i;
-		for (i = 0; i < index; i++)
+		int strend = SZ;
+		for (i = 0; i < SZ; i++)
 		{
-			new_s[i] = str[i];
+			if (str[i] == '\0') strend = i;
 		}
-		new_s[i] = '\0';
-		return Pstring2(new_s);
-	}
+		for (i = 0; i < number; i++)
+		{
+			substr[i] = str[i + strend - number];
+		}
+		substr[i] = '\0';
 
-	Pstring2 Mid(int startWith, int count)
+		return substr;
+	}
+	Pstring2 Mid(int position, int number)
 	{
-		CheckBorders(startWith, count);
-		char new_s[STRING_SIZE];
+		Pstring2 substr = "";
 		int i;
-		for (i = 0; i < startWith + count; i++)
-		{
-			new_s[i] = str[i + startWith];
-		}
-		new_s[i] = '\0';
-		return Pstring2(new_s);
+		for (i = 0; i < SZ - position && i < number; i++)
+			substr[i] = str[i + position];
+		substr[i] = '\0';
+		return substr;
 	}
-
 };
-
-
 
 int main()
 {
-	char str_1[7] = { 'M', 'e', 'r', 'r', 'r', 'y', '\0' };
-	char str_2[11] = { ' ', 'c', 'h', 'r', 'i', 's', 't', 'm', 'a', 's', '\0' };
-	Pstring2 s1(str_1);
+	Pstring2 s1 = "Hello world!";
 
-	Pstring s2 = s1.Right(2);
-	s2.Display();
+	cout << "left = "; 
+	s1.Left(5).Display();
+	cout << endl;
+
+	cout << "right = ";
+	s1.Right(6).Display();
+	cout << endl;
+
+	cout << "mid = ";
+	s1.Mid(3, 5).Display();
 	cout << endl;
 
 	return 0;
