@@ -32,18 +32,19 @@ class Publication2 : public Publication
 {
 protected:
 	string Date;
+
 public:
 	void GetData1()
 	{
-		Publication: GetData();
+	Publication::GetData();
 		cout << "Input date of publication: ";
 		cin >> Date;
 	}
 
 	void PutData()
 	{
-		Publication: PutData();
-		cout << "Date of publication: " << Date;
+	Publication::PutData();
+		cout << "Date of publication: " << Date << endl;
 	}
 };
 
