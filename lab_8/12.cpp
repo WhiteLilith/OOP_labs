@@ -13,17 +13,20 @@ protected:
 
 	void ConvertFromDecimalToOldPounds()
 	{
-		double pennyTemp, temp1, temp2;
+		double pennyTemp, bus1, bus2;
 
 		penny = decimalPounds * 240;
 		pounds = static_cast<long>(decimalPounds);
+
 		pennyTemp = pounds * 240;
-		temp1 = penny - pennyTemp;
-		temp1 = static_cast<int>(temp1);
-		shillings = temp1 / 12;
+		bus1 = penny - pennyTemp;
+		bus1 = static_cast<int>(bus1);
+
+		shillings = bus1 / 12;
 		shillings = static_cast<int>(shillings);
-		temp2 = shillings * 12;
-		penny = temp1 - temp2;
+
+		bus2 = shillings * 12;
+		penny = bus1 - bus2;
 	}
 
 	void ConvertFromOldToDecimalPounds()
@@ -32,7 +35,7 @@ protected:
 	}
 
 public:
-	Sterling() : pounds(0), shillings(0), penny(0), decimalPounds(0.0)
+	Sterling() : pounds(0), shillings(0), penny(0), decimalPounds(0)
 	{}
 
 	Sterling(double decimalPounds) :pounds(0), shillings(0), penny(0), decimalPounds(decimalPounds)
@@ -86,50 +89,42 @@ public:
 	}
 };
 
-class Sterfac : Sterling
+
+class Sterfac : public Sterling
 {
-protected:
-	int eights_numerator;
-	int eights_denominator;
+private:
+	int eights;
 
 public:
-	Sterfac() : Sterling(), eights_numerator(0), eights_denominator(1)
-	{}
+	Sterfac() : Sterling(), eights(0)
+	{ }
 
-	Sterfac(double decimalPounds)
+	Sterfac(double decimalPounds) : Sterling(decimalPounds), eights(0)
+	{ }
+
+	Sterfac(long pounds, int shillings, int penny, int eight) : Sterling(pounds, shillings, penny + eights / 8)
 	{
-		double pennyTemp, temp1, temp2;
-
-		penny = decimalPounds * 240;
-		eights_numerator = (int)((penny - (int)penny) * 1000) / 125;
-		eights_denominator = 8;
-		pounds = static_cast<long>(decimalPounds);
-		pennyTemp = pounds * 240;
-		temp1 = penny - pennyTemp;
-		temp1 = static_cast<int>(temp1);
-		shillings = temp1 / 12;
-		shillings = static_cast<int>(shillings);
-		temp2 = shillings * 12;
-		penny = temp1 - temp2;
-	}
-
-	Sterfac(long pounds, int shillings, int penny, int eights_n, int eights_d) : Sterling(pounds, shillings, penny + eights_n / eights_d)
-	{
-		eights_numerator = eights_n;
-		eights_denominator = eights_d;
+		eights = eight;
 	}
 
 	void DisplaySterling()
 	{
-		cout << "\n" << pounds << "." << shillings << "." << penny << "-" << eights_numerator << "/" << eights_denominator << "\n";
+		cout << "\n" << pounds << "." << shillings << "." << penny << "-" 
+			 << eights << "/8" << endl;
 	}
 
 	void PutSterlingOld()
 	{
 		cout << "\nEnter sterling in old system: ";
 		char dummychar;
-		cin >> pounds >> dummychar >> shillings >> dummychar >> penny 
-			>> dummychar >> eights_numerator >> dummychar >> eights_denominator;
+		cin >> pounds >> dummychar >> shillings >> dummychar 
+			>> penny >> dummychar >> eights >> dummychar >> dummychar;
+		ConvertFromOldToDecimalPounds();
+	}
+
+	double GetDecimalPounds() const
+	{
+		return decimalPounds;
 	}
 
 	Sterfac operator+ (Sterfac s)
@@ -161,7 +156,7 @@ int main()
 {
 	Sterfac first;
 	first.PutSterlingOld();
-	
+
 	double _input;
 	cout << "Input Decimal sterlings: ";
 	cin >> _input;
