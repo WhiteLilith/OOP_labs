@@ -1,18 +1,20 @@
 #include <iostream>
 
 using namespace std;
+int counter = 0;
 
-void func(int a)
+void func()
 {
+	setlocale(LC_ALL, "Russian");
 	cout << "функция вызвалась " << counter << " раз\n";
-	if (a < 10)
-	{
-		func(++counter);
-	}
+	++counter;
+
 }
 
 int main()
 {
-	setlocale(LC_ALL, "Rus");
-	func(0);
+	for (int i = 0; i < 11; i++)
+	{
+		func();
+	}
 }
